@@ -1,8 +1,6 @@
 package Transport;
 
-import java.time.LocalDate;
-
-public class Transport {
+public class Transport implements Racing {
 
     private final String brand;
     private final String model;
@@ -20,7 +18,7 @@ public class Transport {
         if (model == null || model.isEmpty() || model.isBlank()) {
             this.model = DEFAULT_VALUE;
         } else {
-            this.model = brand;
+            this.model = model;
         }
         this.engineVolume = engineVolume;
     }
@@ -47,11 +45,7 @@ public class Transport {
 
     @Override
     public String toString() {
-        return "Transport{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", engineVolume=" + engineVolume +
-                '}';
+        return "Бренд - " + brand + ", Модель - " + model + ", Объем мотора - " + engineVolume;
     }
 
     protected void startDriving() {
@@ -62,5 +56,19 @@ public class Transport {
         System.out.println("Прекращаю ехать");
     }
 
+    @Override
+    public void getPitStop(Transport transport) {
+
+    }
+
+    @Override
+    public void getBestTimeLap(Transport transport) {
+
+    }
+
+    @Override
+    public void getMaxSpeed(Transport transport) {
+
+    }
 }
 
