@@ -1,5 +1,6 @@
 import Transport.Bus;
 import Transport.Car;
+import Transport.Transport;
 import Transport.Truck;
 
 public class Main {
@@ -23,6 +24,7 @@ public class Main {
         bus1.getBestTimeLap(bus1);
         truck3.getMaxSpeed(truck3);
 
+        Driver<Transport> carDriver = new Driver<>("CarDriver", "B", 10);
     }
 
 }

@@ -1,6 +1,6 @@
 package Transport;
 
-public class Transport implements Racing {
+public abstract class Transport implements Racing {
 
     private final String brand;
     private final String model;
@@ -33,6 +33,10 @@ public class Transport implements Racing {
 
     public double getEngineVolume() {
         return engineVolume;
+    }
+
+    public String getDEFAULT_VALUE() {
+        return DEFAULT_VALUE;
     }
 
     public void setEngineVolume(double engineVolume) {
