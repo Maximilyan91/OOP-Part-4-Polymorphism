@@ -1,43 +1,31 @@
 package Transport;
 
-import java.time.LocalDate;
+import Drivers.Driver;
 
-public class Transport {
+public abstract class Transport<T extends Driver> implements Racing {
 
     private final String brand;
     private final String model;
-    private final int productionYear;
-    private final String productionCountry;
-    private String color;
-    private int maxSpeed;
-    private final String DEFAULT_COLOR = "white";
-    private final int DEFAULT_YEAR = 2000;
-    private final String DEFAULT_VALUE = "default";
-    private final int MAX_SPEED = 999;
+    private double engineVolume;
 
-    public Transport(String brand, String model, String color, int productionYear, String productionCountry, int maxSpeed) {
+    private T driver;
+    private final String DEFAULT_VALUE = "default";
+    private final double DEFAULT_ENGINE_VOLUME = 0.1;
+
+    public Transport(String brand, String model, double engineVolume, T driver) {
         if (brand == null || brand.isEmpty() || brand.isBlank()) {
             this.brand = DEFAULT_VALUE;
         } else {
             this.brand = brand;
         }
-        if (model == null || model.isEmpty() || brand.isBlank()) {
+
+        if (model == null || model.isEmpty() || model.isBlank()) {
             this.model = DEFAULT_VALUE;
         } else {
             this.model = model;
         }
-        setColor(color);
-        if (productionYear <= 0 && productionYear > LocalDate.now().getYear()) {
-            this.productionYear = DEFAULT_YEAR;
-        } else {
-            this.productionYear = productionYear;
-        }
-        if (productionCountry == null || productionCountry.isEmpty() || productionCountry.isBlank()) {
-            this.productionCountry = DEFAULT_VALUE;
-        } else {
-            this.productionCountry = productionCountry;
-        }
-        setMaxSpeed(maxSpeed);
+        this.engineVolume = engineVolume;
+        this.driver = driver;
     }
 
     public String getBrand() {
@@ -48,47 +36,60 @@ public class Transport {
         return model;
     }
 
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public String getProductionCountry() {
-        return productionCountry;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public int getMaxSpeed() {
-        return maxSpeed;
+    public double getEngineVolume() {
+        return engineVolume;
     }
 
     public String getDEFAULT_VALUE() {
         return DEFAULT_VALUE;
     }
 
-    public void setColor(String color) {
-        if (color == null || color.isEmpty() || color.isBlank()) {
-            this.color = DEFAULT_COLOR;
-        } else {
-            this.color = color;
+    public void setEngineVolume(double engineVolume) {
+        this.engineVolume = engineVolume;
+        if (Double.compare(this.engineVolume,0)==0) {
+            this.engineVolume = DEFAULT_ENGINE_VOLUME;
         }
+
     }
-    public void setMaxSpeed(int maxSpeed) {
-        if (maxSpeed > 0 && maxSpeed < MAX_SPEED)
-        this.maxSpeed = maxSpeed;
+
+    public T getDriver() {
+        return driver;
+    }
+
+    public void setDriver(T driver) {
+        this.driver = driver;
+    }
+
+    public void printInfo() {
+        System.out.println("водитель " + driver.getFullName() + " управляет автомобилем " + getBrand() + " и будет участвовать в заезде");
     }
 
     @Override
     public String toString() {
-        return "Transport.Transport{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", productionYear=" + productionYear +
-                ", productionCountry='" + productionCountry + '\'' +
-                ", color='" + color + '\'' +
-                ", maxSpeed=" + maxSpeed +
-                '}';
+        return "Бренд - " + brand + ", Модель - " + model + ", Объем мотора - " + engineVolume;
+    }
+
+    protected void startDriving() {
+        System.out.println("Начинаю ехать");
+    }
+
+    protected void stopDriving() {
+        System.out.println("Прекращаю ехать");
+    }
+
+    @Override
+    public void getPitStop(Transport transport) {
+
+    }
+
+    @Override
+    public void getBestTimeLap(Transport transport) {
+
+    }
+
+    @Override
+    public void getMaxSpeed(Transport transport) {
+
     }
 }
+
