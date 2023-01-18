@@ -1,14 +1,18 @@
 package Transport;
 
-public abstract class Transport implements Racing {
+import Drivers.Driver;
+
+public abstract class Transport<T extends Driver> implements Racing {
 
     private final String brand;
     private final String model;
     private double engineVolume;
+
+    private T driver;
     private final String DEFAULT_VALUE = "default";
     private final double DEFAULT_ENGINE_VOLUME = 0.1;
 
-    public Transport(String brand, String model, double engineVolume) {
+    public Transport(String brand, String model, double engineVolume, T driver) {
         if (brand == null || brand.isEmpty() || brand.isBlank()) {
             this.brand = DEFAULT_VALUE;
         } else {
@@ -21,6 +25,7 @@ public abstract class Transport implements Racing {
             this.model = model;
         }
         this.engineVolume = engineVolume;
+        this.driver = driver;
     }
 
     public String getBrand() {
@@ -45,6 +50,18 @@ public abstract class Transport implements Racing {
             this.engineVolume = DEFAULT_ENGINE_VOLUME;
         }
 
+    }
+
+    public T getDriver() {
+        return driver;
+    }
+
+    public void setDriver(T driver) {
+        this.driver = driver;
+    }
+
+    public void printInfo() {
+        System.out.println("водитель " + driver.getFullName() + " управляет автомобилем " + getBrand() + " и будет участвовать в заезде");
     }
 
     @Override

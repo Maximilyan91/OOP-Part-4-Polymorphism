@@ -1,9 +1,13 @@
 package Transport;
 
-public class Truck extends Transport {
-    public Truck(String brand, String model, double engineVolume) {
-        super(brand, model, engineVolume);
+import Drivers.DriverC;
+
+public class Truck extends Transport<DriverC> implements Racing {
+
+    public Truck(String brand, String model, double engineVolume, DriverC driver) {
+        super(brand, model, engineVolume, driver);
     }
+
     public void getPitStop(Truck truck) {
         System.out.println(truck.getBrand() + " " + truck.getModel() + " - съехал с дистанции на питстоп!");
     }
